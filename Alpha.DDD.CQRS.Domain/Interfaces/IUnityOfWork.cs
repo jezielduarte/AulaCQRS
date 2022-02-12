@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Aula.DDD.CQRS.Domain.Interfaces
 {
-    public interface IAccountRepository
+    public interface IUnityOfWork
     {
- 
+        public void BeginTransaction();
+
+        public void Commit();
+
+        public void Rollback();
+
     }
 }

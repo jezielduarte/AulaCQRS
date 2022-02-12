@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Aula.DDD.CQRS.Domain.Interfaces
 {
-    public interface IAccountRepository
+    interface IAccountHolderRepository
     {
- 
     }
 }
