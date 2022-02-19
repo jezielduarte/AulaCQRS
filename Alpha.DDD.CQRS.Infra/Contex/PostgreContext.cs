@@ -9,7 +9,9 @@ namespace Repository.Contex
     {
         public PostgreContext(DbContextOptions<PostgreContext> options) : base(options)
         {
-
+            //Criar banco de dados
+            Database.EnsureCreated();
+            Database.Migrate();
         }
 
         public DbSet<User> User { get; set; }
@@ -26,7 +28,9 @@ namespace Repository.Contex
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new AccountMap());
             modelBuilder.ApplyConfiguration(new AccountHolderMap());
+            
             modelBuilder.ApplyConfiguration(new UserMap());
+
             base.OnModelCreating(modelBuilder);
         }
 

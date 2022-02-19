@@ -1,16 +1,29 @@
 ﻿using Aula.DDD.CQRS.Domain.Accounts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-
 
 namespace Aula.DDD.CQRS.Infra.PostgreMap
 {
-    class TransactionMap : IEntityTypeConfiguration<Transaction>
+    public class TransactionMap : IEntityTypeConfiguration<Transaction>
     {
         public void Configure(EntityTypeBuilder<Transaction> builder)
         {
-            throw new NotImplementedException();
+            builder.ToTable("TB_TRANSACTION");
+
+            builder.HasKey(user => user.Id);
+
+            builder.Property(user => user.Id)
+                .HasColumnName("ID");
+
+            builder.Property(user => user.Date)
+                .HasColumnName("DATE")
+                .HasColumnType("datetime")
+                .IsRequired();
+
+            builder.Property(user => user.Operation)
+                .HasColumnName("OPERATION")
+                .HasColumnType("int")
+                .IsRequired();
         }
     }
 }

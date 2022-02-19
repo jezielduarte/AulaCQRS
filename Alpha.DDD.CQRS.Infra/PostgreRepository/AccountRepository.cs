@@ -36,7 +36,25 @@ namespace Repository.PostgreRepository
 
         public async Task SaveAccountAsync(Account account)
         {
-            await _context.Account.AddAsync(account);
+            //await _context.Account.AddAsync(account);
+
+            _context.Entry(account).State = EntityState.Added;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task SaveAllAsync(IList<Account> accounts)
+        {
+            //await _context.Account.AddAsync(account);
+
+            await _context.AddRangeAsync(accounts);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAccountAsync(Account account)
+        {
+            _context.Account.Update(account);
             await _context.SaveChangesAsync();
         }
 

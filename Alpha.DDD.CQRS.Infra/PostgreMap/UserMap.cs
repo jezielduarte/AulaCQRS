@@ -9,6 +9,8 @@ namespace Aula.DDD.CQRS.Infra.PostgreMap
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.ToTable("TB_USER");
+
             builder.HasKey(user => user.Id);
 
             builder.Property(user => user.Id)

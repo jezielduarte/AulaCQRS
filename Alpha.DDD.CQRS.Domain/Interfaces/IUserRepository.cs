@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aula.DDD.CQRS.Domain.Users.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace Aula.DDD.CQRS.Domain.Interfaces
 {
     public interface IUserRepository
     {
+        Task<User> FindUserByName(string name);
 
+        Task SaveUserAsync(User user);
     }
 }
