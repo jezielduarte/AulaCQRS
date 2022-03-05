@@ -1,4 +1,5 @@
-﻿using Aula.DDD.CQRS.Domain.Users.Entities;
+﻿using Aula.DDD.CQRS.Domain.Accounts;
+using Aula.DDD.CQRS.Domain.Users.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Aula.DDD.CQRS.Domain.Interfaces
         Task<User> FindUserByName(string name);
 
         Task SaveUserAsync(User user);
+        
     }
 }
