@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Aula.DDD.CQRS.Application.User.Commands;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Aula.DDD.CQRS.Command.API.Controllers
 {
@@ -12,36 +10,33 @@ namespace Aula.DDD.CQRS.Command.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IMediator _mediator;
+
+        public UserController(IMediator mediator)
         {
-            return new string[] { "value1", "value2" };
+            _mediator = mediator;
         }
 
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] CreateUserCommand command)
         {
+            var response = await _mediator.Send(command);
+            return StatusCode(response.StatusCode, response);
         }
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> Put(Guid userId, [FromBody] UpdateUserCommand command)
         {
+            command.SetId(userId);
+            var response = await _mediator.Send(command);
+            return StatusCode(response.StatusCode, response);
         }
 
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> Delete(Guid userId)
         {
+            var response = await _mediator.Send(new DeleteUserCommand(userId));
+            return StatusCode(response.StatusCode, response);
         }
     }
 }

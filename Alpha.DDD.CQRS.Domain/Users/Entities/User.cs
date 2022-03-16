@@ -1,20 +1,22 @@
 ﻿using Aula.DDD.CQRS.Domain.Exeptions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aula.DDD.CQRS.Domain.Users.Entities
 {
     public class User
     {
+        public User()
+        {
+
+        }
         public User(string name, string pass, bool allowsOpenAccount, bool allowsReleaseOverdraft)
         {
             UserName = name;
             Pass = pass;
             AllowsOpenAccount = allowsOpenAccount;
             AllowsReleaseOverdraft = allowsReleaseOverdraft;
+            Errors = new List<BrokenRule>();
         }
 
         public Guid Id { get; protected set; }
@@ -28,7 +30,6 @@ namespace Aula.DDD.CQRS.Domain.Users.Entities
         public bool AllowsReleaseOverdraft { get; protected set; }
 
         public DateTime CreateDate { get; protected set; }
-
 
         public List<BrokenRule> Errors { get; protected set; }
 

@@ -17,13 +17,25 @@ namespace Aula.DDD.CQRS.Infra.PostgreMap
 
             builder.Property(user => user.Date)
                 .HasColumnName("DATE")
-                .HasColumnType("datetime")
                 .IsRequired();
 
             builder.Property(user => user.Operation)
                 .HasColumnName("OPERATION")
                 .HasColumnType("int")
                 .IsRequired();
+
+            builder.Property(user => user.Ammount)
+                .HasColumnName("AMMOUNT")
+                .IsRequired();
+
+            builder.Property(user => user.Date)
+                .HasColumnName("DATE")
+                .IsRequired();
+
+            builder.Property(user => user.AccountId)
+                .HasColumnName("ACCOUNT_ID")
+                .IsRequired();
+
         }
     }
 }

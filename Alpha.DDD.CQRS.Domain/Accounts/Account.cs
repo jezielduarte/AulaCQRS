@@ -2,14 +2,16 @@
 using Aula.DDD.CQRS.Domain.Users.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aula.DDD.CQRS.Domain.Accounts
 {
     public class Account
     {
+        public Account()
+        {
+            Errors = new List<BrokenRule>();
+        }
+
         public Guid Id { get; protected set; }
 
         public string Agency { get; protected set; }
@@ -25,7 +27,6 @@ namespace Aula.DDD.CQRS.Domain.Accounts
         public AccountType AccountType { get; protected set; }
         public decimal Overdraft { get; protected set; }
         public string UserOverdraftReleaser { get; protected set; }
-
 
         public List<BrokenRule> Errors { get; protected set; }
 

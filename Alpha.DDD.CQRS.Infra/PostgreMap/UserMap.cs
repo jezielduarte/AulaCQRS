@@ -1,7 +1,6 @@
 ﻿using Aula.DDD.CQRS.Domain.Users.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace Aula.DDD.CQRS.Infra.PostgreMap
 {
@@ -27,6 +26,22 @@ namespace Aula.DDD.CQRS.Infra.PostgreMap
                 .HasMaxLength(50)
                 .HasColumnType("varchar")
                 .IsRequired();
+
+            builder.Property(user => user.AllowsOpenAccount)
+                .HasColumnName("ALLOWS_OPEN_ACCOUNT")
+                .HasDefaultValue(false)
+                .IsRequired();
+
+            builder.Property(user => user.AllowsReleaseOverdraft)
+                .HasColumnName("ALLOWS_RELEASE_OVERDRAFT")
+                .HasDefaultValue(false)
+                .IsRequired();
+
+            builder.Property(user => user.CreateDate)
+                .HasColumnName("CREATE_DATE")
+                .IsRequired();
+
+            builder.Ignore(x => x.Errors);
         }
     }
 }

@@ -8,11 +8,11 @@ namespace Aula.DDD.CQRS.Domain.Interfaces
 {
     public interface IUnityOfWork
     {
-        public void BeginTransaction();
+        void BeginTransaction();
 
-        public void Commit();
+        void Commit();
 
-        public void Rollback();
+        void Rollback();
 
     }
 }

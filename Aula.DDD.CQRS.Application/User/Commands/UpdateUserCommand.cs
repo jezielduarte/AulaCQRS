@@ -1,12 +1,18 @@
 ﻿
 using Aula.DDD.CQRS.Application.Util;
 using MediatR;
+using System;
 
 namespace Aula.DDD.CQRS.Application.User.Commands
 {
-    public class CreateUserCommand : IRequest<Response>
+    public class UpdateUserCommand : IRequest<Response>
     {
-        public string UserName { get; set; }
+        public void SetId(Guid userId)
+        {
+            UserId = userId;
+        }
+
+        public Guid UserId { get; protected set; }
 
         public string Pass { get; set; }
 

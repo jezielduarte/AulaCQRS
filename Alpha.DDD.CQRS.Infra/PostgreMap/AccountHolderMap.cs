@@ -1,7 +1,6 @@
 ﻿using Aula.DDD.CQRS.Domain.Accounts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace Aula.DDD.CQRS.Infra.PostgreMap
 {
@@ -9,7 +8,28 @@ namespace Aula.DDD.CQRS.Infra.PostgreMap
     {
         public void Configure(EntityTypeBuilder<AccountHolder> builder)
         {
-            throw new NotImplementedException();
+            builder.ToTable("TB_ACCOUNT_HOLDER");
+
+            builder.Property(account => account.Id)
+                .HasColumnName("ID");
+
+            builder.Property(account => account.Name)
+                .HasColumnName("NAME")
+                .HasMaxLength(50)
+                .HasColumnType("varchar")
+                .IsRequired();
+
+            builder.Property(account => account.Email)
+                .HasColumnName("EMAIL")
+                .HasMaxLength(100)
+                .HasColumnType("varchar")
+                .IsRequired();
+
+            builder.Property(account => account.CreateDate)
+                .HasColumnName("CREATE_DATE")
+                .IsRequired();
+
+            builder.Ignore(x => x.Errors);
         }
     }
 }

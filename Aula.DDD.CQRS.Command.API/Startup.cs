@@ -1,21 +1,15 @@
+using Aula.DDD.CQRS.Application.User.Handlers;
 using Aula.DDD.CQRS.Domain.Interfaces;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Repository.Contex;
 using Repository.PostgreRepository;
 using Repository.UnityOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Aula.DDD.CQRS.Command.API
 {
@@ -31,6 +25,7 @@ namespace Aula.DDD.CQRS.Command.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMediatR(typeof(CreateUserHandler));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -38,14 +33,13 @@ namespace Aula.DDD.CQRS.Command.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aula.DDD.CQRS.Command.API", Version = "v1" });
             });
 
-            //services.AddDbContext<PostgreContext>(opt => opt.UseNpgsql("name=ConnectionStrings:DataBase"));
+            services.AddDbContext<PostgreContext>(opt => opt.UseNpgsql("name=ConnectionStrings:DataBase"));
 
-            ////Existe dentro de toda vida util do projeto
-            //services.AddSingleton<IUserRepository, UserRepository>();
+            ////Existe durante a requiseção
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
 
-            //services.AddScoped<IUnityOfWork, UnityOfWork>();
-
-
+            services.AddScoped<IUnityOfWork, UnityOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

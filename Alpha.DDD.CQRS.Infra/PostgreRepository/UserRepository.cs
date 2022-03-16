@@ -1,4 +1,5 @@
-﻿using Aula.DDD.CQRS.Domain.Interfaces;
+﻿using Aula.DDD.CQRS.Domain.Accounts;
+using Aula.DDD.CQRS.Domain.Interfaces;
 using Aula.DDD.CQRS.Domain.Users.Entities;
 using Microsoft.EntityFrameworkCore;
 using Repository.Contex;
