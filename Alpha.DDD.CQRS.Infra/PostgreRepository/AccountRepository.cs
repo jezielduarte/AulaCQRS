@@ -29,7 +29,7 @@ namespace Repository.PostgreRepository
             return await _context.AccountHolder.FindAsync(id);
         }
 
-        public async Task<IList<Transaction>> GetByAccountNumberAndAgency(string accountNumber, string Agency)
+        public async Task<IList<Transaction>> GetByExtractNumberAndAgency(string accountNumber, string Agency)
         {
             return await _context.Transactions.Where(x=> x.Account.AccountNumber == accountNumber && x.Account.Agency == Agency).ToListAsync();
         }

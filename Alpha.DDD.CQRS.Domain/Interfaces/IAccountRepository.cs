@@ -13,7 +13,7 @@ namespace Aula.DDD.CQRS.Domain.Interfaces
 
         Task<AccountHolder> FindAccountHolderById(Guid id);
 
-        Task<IList<Transaction>> GetByAccountNumberAndAgency(string accountNumber, string Agency);
+        Task<IList<Transaction>> GetByExtractNumberAndAgency(string accountNumber, string Agency);
 
         Task SaveAccountAsync(Account account);
 
