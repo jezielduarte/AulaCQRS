@@ -47,8 +47,7 @@ namespace Aula.DDD.CQRS.Command.API
         {
 
             app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Aula.DDD.CQRS.Command.API v1"));
+          
 
             app.UseHttpsRedirection();
 
@@ -60,6 +59,13 @@ namespace Aula.DDD.CQRS.Command.API
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => 
+            {
+                c.RoutePrefix = string.Empty;
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Aula.DDD.CQRS.Command.API v1");
+             });
         }
     }
 }
